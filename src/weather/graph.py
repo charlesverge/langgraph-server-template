@@ -6,9 +6,6 @@ from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph
 from langgraph.graph.message import add_messages
 from langgraph.graph.ui import AnyUIMessage, ui_message_reducer, push_ui_message
-import logging
-
-logger = logging.getLogger(__name__)
 
 
 class AgentState(TypedDict):  # noqa: D101
@@ -16,12 +13,19 @@ class AgentState(TypedDict):  # noqa: D101
     ui: Annotated[Sequence[AnyUIMessage], ui_message_reducer]
 
 
+class Weather(TypedDict):
+    temperature: float
+    conditions: str
+    humidity: float
+    wind_speed: float
+
+
+class WeatherOutput(TypedDict):
+    city: str
+    weather: Weather
+
+
 async def weather(state: AgentState):
-    logging.info("weather: weather ", state)
-
-    class WeatherOutput(TypedDict):
-        city: str
-
     weather: WeatherOutput = (
         await ChatOpenAI(model="gpt-4o-mini")
         .with_structured_output(WeatherOutput)

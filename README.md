@@ -1,10 +1,20 @@
 # LangGraph GenUI with python LangGraph agent
 
-The demo for [LangGraph Generative UI](https://github.com/charlesverge/langgraphjs-gen-ui-examples) utilizes a Node server, which presents an issue with much of your code base is in Python. To bridge this gap you can setup a nginx proxy to serve the ui directory and allow the chat to connect directly to the python LangGraph server or you can on the node server use [RemoteGraph][https://langchain-ai.github.io/langgraph/how-tos/use-remote-graph/] proxy the request.
+The demo for [LangGraph Generative UI](https://github.com/charlesverge/langgraphjs-gen-ui-examples) utilizes a Node server, which presents an issue with much of your code base is in Python. To bridge this gap you can setup a nginx proxy to serve the ui directory and allow the chat to connect directly to the python LangGraph server or you can on the node server use [RemoteGraph](https://langchain-ai.github.io/langgraph/how-tos/use-remote-graph/) proxy the request.
 
 The UI which can render the React components is provided by LangGraph at https://github.com/langchain-ai/agent-chat-ui
+
 LangGraph Python server is at https://github.com/charlesverge/langgraph-server-template
+
 LangGraph Generative UI Node server is at https://github.com/charlesverge/langgraphjs-gen-ui-examples
+
+On the python server push_ui_message("weatherComponent", weather, message=message) is utilized to send the
+https://github.com/charlesverge/langgraph-server-template/blob/main/src/weather/graph.py
+
+Which renders the weather component
+https://github.com/charlesverge/langgraphjs-gen-ui-examples/blob/main/src/agent-uis/weather/ui.tsx#L16
+Which is included in the Component map
+https://github.com/charlesverge/langgraphjs-gen-ui-examples/blob/main/src/agent-uis/index.tsx#L20
 
 # LangGraph ReAct Agent Template
 
